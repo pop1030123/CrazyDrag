@@ -18,6 +18,17 @@
     [super viewDidLoad];
     // Do any additional setup after loading the view, typically from a nib.
 }
+- (IBAction)showAlert:(id)sender {
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"aaa" message:@"message" preferredStyle:UIAlertControllerStyleAlert];
+    
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"ok" style:UIAlertViewStyleDefault  handler:^(UIAlertAction *action){
+        NSLog(@"") ;
+    }];
+    
+    [alertController addAction:action] ;
+    
+    [self presentViewController:alertController animated:true completion:nil];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
