@@ -8,16 +8,20 @@
 
 #import "ViewController.h"
 
-@interface ViewController ()
+@interface ViewController (){
+    int currentValue ;
+}
+
+@property (strong, nonatomic) IBOutlet UISlider *slider;
 
 @end
 
 @implementation ViewController
+@synthesize slider ;
 
-int currentValue ;
 - (void)viewDidLoad {
     [super viewDidLoad];
-    currentValue = 50 ;
+    currentValue = (int)lroundf(slider.value) ;
     // Do any additional setup after loading the view, typically from a nib.
 }
 - (IBAction)showAlert:(id)sender {
@@ -26,7 +30,7 @@ int currentValue ;
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"aaa" message:message preferredStyle:UIAlertControllerStyleAlert];
     
-    UIAlertAction *action = [UIAlertAction actionWithTitle:@"ok" style:UIAlertViewStyleDefault  handler:^(UIAlertAction *action){
+    UIAlertAction *action = [UIAlertAction actionWithTitle:@"ok" style:UIAlertActionStyleDefault  handler:^(UIAlertAction *action){
         NSLog(@"") ;
     }];
     
@@ -34,10 +38,8 @@ int currentValue ;
     
     [self presentViewController:alertController animated:true completion:nil];
 }
-- (IBAction)movedSlide:(id)sender {
-    
-    UISlider *slider = (UISlider*)sender ;
-    currentValue = (int)lroundf(slider.value) ;
+- (IBAction)movedSlide:(UISlider *)sender {
+    currentValue = (int)lroundf(sender.value) ;
     NSLog(@"current value :%d" ,currentValue) ;
 }
 
