@@ -10,6 +10,7 @@
 
 @interface ViewController (){
     int currentValue ;
+    int targetValue ;
 }
 
 @property (strong, nonatomic) IBOutlet UISlider *slider;
@@ -21,12 +22,20 @@
 
 - (void)viewDidLoad {
     [super viewDidLoad];
-    currentValue = (int)lroundf(slider.value) ;
+    [self startNewRound] ;
     // Do any additional setup after loading the view, typically from a nib.
 }
+
+- (void)startNewRound{
+    currentValue = 50 ;
+    targetValue = 1+arc4random()%100 ;
+    self.slider.value = currentValue ;
+}
+
+
 - (IBAction)showAlert:(id)sender {
     
-    NSString *message = [NSString stringWithFormat:@"你选择了%d" ,currentValue];
+    NSString *message = [NSString stringWithFormat:@"你选择了%d，目标是%d" ,currentValue ,targetValue];
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"aaa" message:message preferredStyle:UIAlertControllerStyleAlert];
     
@@ -37,6 +46,7 @@
     [alertController addAction:action] ;
     
     [self presentViewController:alertController animated:true completion:nil];
+    [self startNewRound] ;
 }
 - (IBAction)movedSlide:(UISlider *)sender {
     currentValue = (int)lroundf(sender.value) ;
