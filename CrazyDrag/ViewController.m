@@ -11,8 +11,12 @@
 @interface ViewController (){
     int currentValue ;
     int targetValue ;
+    int scoreValue ;
+    int roundCount ;
 }
+@property (strong, nonatomic) IBOutlet UILabel *scoreLabel;
 
+@property (strong, nonatomic) IBOutlet UILabel *targetInfo;
 @property (strong, nonatomic) IBOutlet UISlider *slider;
 
 @end
@@ -27,15 +31,22 @@
 }
 
 - (void)startNewRound{
+    roundCount +=1 ;
     currentValue = 50 ;
     targetValue = 1+arc4random()%100 ;
     self.slider.value = currentValue ;
+    self.targetInfo.text = [NSString stringWithFormat:@"需要: %d" ,targetValue] ;
 }
 
 
 - (IBAction)showAlert:(id)sender {
     
-    NSString *message = [NSString stringWithFormat:@"你选择了%d，目标是%d" ,currentValue ,targetValue];
+    int differ = abs(currentValue - targetValue) ;
+    int point = 100 - differ ;
+    
+    scoreValue += point ;
+    
+    NSString *message = [NSString stringWithFormat:@"你的得分是%d",point];
     
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"aaa" message:message preferredStyle:UIAlertControllerStyleAlert];
     
@@ -45,8 +56,10 @@
     
     [alertController addAction:action] ;
     
-    [self presentViewController:alertController animated:true completion:nil];
-    [self startNewRound] ;
+    [self presentViewController:alertController animated:true completion:^(){
+        self.scoreLabel.text = [NSString stringWithFormat:@"第%d回合 ，你的总分是 ：%d" ,roundCount ,scoreValue] ;
+        [self startNewRound] ;
+    }];
 }
 - (IBAction)movedSlide:(UISlider *)sender {
     currentValue = (int)lroundf(sender.value) ;
