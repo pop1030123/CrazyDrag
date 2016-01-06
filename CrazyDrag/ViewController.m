@@ -38,6 +38,12 @@
     self.targetInfo.text = [NSString stringWithFormat:@"需要: %d" ,targetValue] ;
 }
 
+- (void)resetGame{
+    scoreValue = 0 ;
+    roundCount = 1 ;
+    self.scoreLabel.text = [NSString stringWithFormat:@"......"] ;
+    [self startNewRound] ;
+}
 
 - (IBAction)showAlert:(id)sender {
     
@@ -51,24 +57,26 @@
     UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"aaa" message:message preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *action = [UIAlertAction actionWithTitle:@"ok" style:UIAlertActionStyleDefault  handler:^(UIAlertAction *action){
-        NSLog(@"") ;
+        self.scoreLabel.text = [NSString stringWithFormat:@"第%d回合 ，你的总分是 ：%d" ,roundCount ,scoreValue] ;
+        [self startNewRound] ;
     }];
     
     [alertController addAction:action] ;
     
     [self presentViewController:alertController animated:true completion:^(){
-        self.scoreLabel.text = [NSString stringWithFormat:@"第%d回合 ，你的总分是 ：%d" ,roundCount ,scoreValue] ;
-        [self startNewRound] ;
+        
     }];
 }
 - (IBAction)movedSlide:(UISlider *)sender {
     currentValue = (int)lroundf(sender.value) ;
     NSLog(@"current value :%d" ,currentValue) ;
 }
+- (IBAction)resetGame:(id)sender {
+    [self resetGame];
+}
 
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
 }
-
 @end
