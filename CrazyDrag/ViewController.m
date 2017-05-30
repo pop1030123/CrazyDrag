@@ -8,6 +8,7 @@
 
 #import "ViewController.h"
 #import "AboutViewController.h"
+#import <AVFoundation/AVFoundation.h>
 
 @interface ViewController (){
     int currentValue ;
@@ -15,6 +16,9 @@
     int scoreValue ;
     int roundCount ;
 }
+
+@property(strong ,nonatomic)AVAudioPlayer *audioPlayer ;
+
 @property (strong, nonatomic) IBOutlet UILabel *scoreLabel;
 
 @property (strong, nonatomic) IBOutlet UILabel *targetInfo;
@@ -25,11 +29,45 @@
 
 @implementation ViewController
 @synthesize slider ;
+@synthesize audioPlayer ;
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    UIImage *imageNormal = [UIImage imageNamed:@"SliderThumb-Normal"] ;
+    [self.slider setThumbImage:imageNormal forState:UIControlStateNormal];
+    
+    UIImage *imageHighlighted = [UIImage imageNamed:@"SliderThumb-Highlighted"] ;
+    [self.slider setThumbImage:imageHighlighted forState:UIControlStateHighlighted] ;
+    
+    UIImage *trackLeftImage = [[UIImage imageNamed:@"SliderTrackLeft"] stretchableImageWithLeftCapWidth:14 topCapHeight:0] ;
+    [self.slider setMinimumTrackImage:trackLeftImage forState:UIControlStateNormal] ;
+    
+    UIImage *trackRightImage = [[UIImage imageNamed:@"SliderTrackRight"] stretchableImageWithLeftCapWidth:14 topCapHeight:0] ;
+    [self.slider setMaximumTrackImage:trackRightImage forState:UIControlStateNormal] ;
+    
+    
     [self startNewRound] ;
+    
+    [self playBackgroundMusic];
     // Do any additional setup after loading the view, typically from a nib.
+}
+
+-(void)playBackgroundMusic{
+    NSString *musicPath = [[NSBundle mainBundle]pathForResource:@"no" ofType:@"mp3"] ;
+    NSURL *url = [NSURL fileURLWithPath:musicPath] ;
+    NSError *error ;
+    
+    audioPlayer = [[AVAudioPlayer alloc]initWithContentsOfURL:url error:&error] ;
+    
+    if(audioPlayer == nil){
+        NSString *errorLog = [NSString stringWithString:[error description]] ;
+        NSLog(@"the play error %@:" ,errorLog) ;
+    }else{
+        audioPlayer.numberOfLoops = -1 ;
+        [audioPlayer play] ;
+    }
+    
 }
 
 - (void)startNewRound{
@@ -37,14 +75,22 @@
     currentValue = self.slider.value ;
     targetValue = 1+arc4random()%100 ;
     self.slider.value = currentValue ;
-    self.targetInfo.text = [NSString stringWithFormat:@"需要: %d" ,targetValue] ;
+    self.targetInfo.text = [NSString stringWithFormat:@"拖动滑动条，让靶心尽可能接近数字: %d" ,targetValue] ;
 }
 
 - (void)resetGame{
+    
+    CATransition *animation = [CATransition animation] ;
+    animation.type = kCATransitionFade ;
+    animation.duration = 1 ;
+    animation.timingFunction = [CAMediaTimingFunction functionWithName:kCAMediaTimingFunctionEaseOut];
+    
     scoreValue = 0 ;
     roundCount = 1 ;
     self.scoreLabel.text = [NSString stringWithFormat:@"......"] ;
     [self startNewRound] ;
+    
+    [self.view.layer addAnimation:animation forKey:nil] ;
 }
 
 - (IBAction)showAlert:(id)sender {

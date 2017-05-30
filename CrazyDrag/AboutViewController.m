@@ -9,16 +9,26 @@
 #import "AboutViewController.h"
 
 @interface AboutViewController ()
+@property (strong, nonatomic) IBOutlet UIWebView *webView;
 
 @end
 
 @implementation AboutViewController
+
+@synthesize webView ;
+
+
 - (IBAction)close:(id)sender {
     [self.presentingViewController dismissViewControllerAnimated:YES completion:nil] ;
 }
 
 - (void)viewDidLoad {
     [super viewDidLoad];
+    
+    NSURL *url = [NSURL URLWithString:@"http://www.apple.com"] ;
+    NSURLRequest *request = [NSURLRequest requestWithURL:url] ;
+    [self.webView loadRequest:request] ;
+    
     // Do any additional setup after loading the view from its nib.
 }
 
