@@ -7,6 +7,7 @@
 //
 
 #import "ViewController.h"
+#import "AboutViewController.h"
 
 @interface ViewController (){
     int currentValue ;
@@ -18,6 +19,7 @@
 
 @property (strong, nonatomic) IBOutlet UILabel *targetInfo;
 @property (strong, nonatomic) IBOutlet UISlider *slider;
+- (IBAction)toAboutPage:(id)sender;
 
 @end
 
@@ -32,7 +34,7 @@
 
 - (void)startNewRound{
     roundCount +=1 ;
-    currentValue = 50 ;
+    currentValue = self.slider.value ;
     targetValue = 1+arc4random()%100 ;
     self.slider.value = currentValue ;
     self.targetInfo.text = [NSString stringWithFormat:@"需要: %d" ,targetValue] ;
@@ -52,9 +54,24 @@
     
     scoreValue += point ;
     
-    NSString *message = [NSString stringWithFormat:@"你的得分是%d",point];
+    NSString *suffix = @"" ;
     
-    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"aaa" message:message preferredStyle:UIAlertControllerStyleAlert];
+    if(differ == 0){
+        suffix = @"你太厉害了，满分！" ;
+        scoreValue += 100 ;
+    }else if(differ <= 5){
+        suffix = @"太棒了，就差一点了！" ;
+        if(differ == 1){
+            scoreValue += 50 ;
+        }
+    }else if(differ <= 10){
+        suffix = @"再接再励！" ;
+    }else{
+        suffix = @"太丢脸了!!" ;
+    }
+    
+    NSString *message = [NSString stringWithFormat:@"你的得分是%d ,%@",point ,suffix];
+    UIAlertController *alertController = [UIAlertController alertControllerWithTitle:@"抽奖结果" message:message preferredStyle:UIAlertControllerStyleAlert];
     
     UIAlertAction *action = [UIAlertAction actionWithTitle:@"ok" style:UIAlertActionStyleDefault  handler:^(UIAlertAction *action){
         self.scoreLabel.text = [NSString stringWithFormat:@"第%d回合 ，你的总分是 ：%d" ,roundCount ,scoreValue] ;
@@ -67,10 +84,7 @@
         
     }];
 }
-- (IBAction)movedSlide:(UISlider *)sender {
-    currentValue = (int)lroundf(sender.value) ;
-    NSLog(@"current value :%d" ,currentValue) ;
-}
+
 - (IBAction)resetGame:(id)sender {
     [self resetGame];
 }
@@ -78,5 +92,18 @@
 - (void)didReceiveMemoryWarning {
     [super didReceiveMemoryWarning];
     // Dispose of any resources that can be recreated.
+}
+
+- (IBAction)onSliderMoved:(UISlider*)sender {
+    currentValue = (int) lroundf([sender value])  ;
+    NSLog(@"current value is %d",currentValue);
+}
+
+- (IBAction)toAboutPage:(id)sender {
+    AboutViewController *aboutViewController = [[AboutViewController alloc]initWithNibName:@"AboutViewController" bundle:nil] ;
+    
+    aboutViewController.modalTransitionStyle = UIModalTransitionStyleFlipHorizontal ;
+    
+    [self presentViewController:aboutViewController animated:true completion:nil] ;
 }
 @end

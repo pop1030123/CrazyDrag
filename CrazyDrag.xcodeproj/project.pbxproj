@@ -15,6 +15,8 @@
 		C05B6EED1C33C8A30049AD32 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = C05B6EEB1C33C8A30049AD32 /* LaunchScreen.storyboard */; };
 		C05B6EF81C33C8A30049AD32 /* CrazyDragTests.m in Sources */ = {isa = PBXBuildFile; fileRef = C05B6EF71C33C8A30049AD32 /* CrazyDragTests.m */; };
 		C05B6F031C33C8A30049AD32 /* CrazyDragUITests.m in Sources */ = {isa = PBXBuildFile; fileRef = C05B6F021C33C8A30049AD32 /* CrazyDragUITests.m */; };
+		C0CCE2BB1EDC7F39006CBFD6 /* AboutViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = C0CCE2B91EDC7F39006CBFD6 /* AboutViewController.m */; };
+		C0CCE2BC1EDC7F39006CBFD6 /* AboutViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = C0CCE2BA1EDC7F39006CBFD6 /* AboutViewController.xib */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -51,6 +53,9 @@
 		C05B6EFE1C33C8A30049AD32 /* CrazyDragUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = CrazyDragUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		C05B6F021C33C8A30049AD32 /* CrazyDragUITests.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = CrazyDragUITests.m; sourceTree = "<group>"; };
 		C05B6F041C33C8A30049AD32 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		C0CCE2B81EDC7F39006CBFD6 /* AboutViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = AboutViewController.h; sourceTree = "<group>"; };
+		C0CCE2B91EDC7F39006CBFD6 /* AboutViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = AboutViewController.m; sourceTree = "<group>"; };
+		C0CCE2BA1EDC7F39006CBFD6 /* AboutViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = AboutViewController.xib; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -103,13 +108,16 @@
 			children = (
 				C05B6EE01C33C8A30049AD32 /* AppDelegate.h */,
 				C05B6EE11C33C8A30049AD32 /* AppDelegate.m */,
+				C05B6EE91C33C8A30049AD32 /* Assets.xcassets */,
+				C05B6EEE1C33C8A30049AD32 /* Info.plist */,
+				C05B6EEB1C33C8A30049AD32 /* LaunchScreen.storyboard */,
+				C05B6EE61C33C8A30049AD32 /* Main.storyboard */,
+				C05B6EDD1C33C8A30049AD32 /* Supporting Files */,
 				C05B6EE31C33C8A30049AD32 /* ViewController.h */,
 				C05B6EE41C33C8A30049AD32 /* ViewController.m */,
-				C05B6EE61C33C8A30049AD32 /* Main.storyboard */,
-				C05B6EE91C33C8A30049AD32 /* Assets.xcassets */,
-				C05B6EEB1C33C8A30049AD32 /* LaunchScreen.storyboard */,
-				C05B6EEE1C33C8A30049AD32 /* Info.plist */,
-				C05B6EDD1C33C8A30049AD32 /* Supporting Files */,
+				C0CCE2B81EDC7F39006CBFD6 /* AboutViewController.h */,
+				C0CCE2B91EDC7F39006CBFD6 /* AboutViewController.m */,
+				C0CCE2BA1EDC7F39006CBFD6 /* AboutViewController.xib */,
 			);
 			path = CrazyDrag;
 			sourceTree = "<group>";
@@ -246,6 +254,7 @@
 			files = (
 				C05B6EED1C33C8A30049AD32 /* LaunchScreen.storyboard in Resources */,
 				C05B6EEA1C33C8A30049AD32 /* Assets.xcassets in Resources */,
+				C0CCE2BC1EDC7F39006CBFD6 /* AboutViewController.xib in Resources */,
 				C05B6EE81C33C8A30049AD32 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -273,6 +282,7 @@
 			files = (
 				C05B6EE51C33C8A30049AD32 /* ViewController.m in Sources */,
 				C05B6EE21C33C8A30049AD32 /* AppDelegate.m in Sources */,
+				C0CCE2BB1EDC7F39006CBFD6 /* AboutViewController.m in Sources */,
 				C05B6EDF1C33C8A30049AD32 /* main.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -499,6 +509,7 @@
 				C05B6F091C33C8A30049AD32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C05B6F0A1C33C8A30049AD32 /* Build configuration list for PBXNativeTarget "CrazyDragTests" */ = {
 			isa = XCConfigurationList;
@@ -507,6 +518,7 @@
 				C05B6F0C1C33C8A30049AD32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 		C05B6F0D1C33C8A30049AD32 /* Build configuration list for PBXNativeTarget "CrazyDragUITests" */ = {
 			isa = XCConfigurationList;
@@ -515,6 +527,7 @@
 				C05B6F0F1C33C8A30049AD32 /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
